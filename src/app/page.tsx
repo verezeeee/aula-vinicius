@@ -1,7 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
@@ -13,8 +12,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-
-  const { setUser } = useContext(UserContext);
 
   const setEmail = (email: string) =>
     setFormState((prevState) => ({ ...prevState, email }));
@@ -46,7 +43,7 @@ export default function Login() {
       })
       .catch((err) => {
         toast({
-          title: "Erro ao efetuar login",
+          title: err.message,
           status: "error",
           duration: 9000,
           isClosable: true,

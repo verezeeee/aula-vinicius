@@ -23,6 +23,7 @@ import {
 
 export default function ListPage() {
   const [name, setName] = useState("");
+  const [id, setId] = useState(0); // [1
   const [email, setEmail] = useState("");
   const [userLogged, setUserLogged] = useState(null);
   const [selectedUser, setSelectedUser] = useState<any>(null); // [1
@@ -51,6 +52,7 @@ export default function ListPage() {
           },
         });
         setUserLogged(getMe.data.usuario[0].name);
+        setId(getMe.data.usuario[0].id);
       };
 
       const users = await getUsers.data.usuario;
@@ -72,18 +74,26 @@ export default function ListPage() {
         <Td>{user.name}</Td>
         <Td>{user.email}</Td>
         <Td>{user.id}</Td>
-        <Td>
-          <button
-            onClick={() => {
-              setSelectedUser(user);
-              onEditOpen();
-              setName(user.name);
-              setEmail(user.email);
-            }}
-          >
-            Editar
-          </button>
-        </Td>
+        {user.id == id ? (
+          <Td>
+            <button
+              className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 
+          "
+              onClick={() => {
+                setSelectedUser(user);
+                onEditOpen();
+              }}
+            >
+              Editar
+            </button>
+          </Td>
+        ) : (
+          <Td>
+            <button className=" text-red-700 cursor-not-allowed" disabled>
+              Você não pode editar
+            </button>
+          </Td>
+        )}
         <Td>
           <button
             className="text-red-500 hover:text-red-700 cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 
@@ -260,7 +270,7 @@ export default function ListPage() {
               <button
                 onClick={() => {
                   localStorage.removeItem("token");
-                  setUseEffectControl(!useEffectControl);
+                  window.location.href = "/";
                   redirect("/");
                 }}
               >
@@ -287,7 +297,9 @@ export default function ListPage() {
             <Tbody>
               {usersArray.map((user) => (
                 <>
-                  <UsersTable key={user.id} user={user} />
+                  {user.deleted_at === null && (
+                    <UsersTable key={user.id} user={user} />
+                  )}
                 </>
               ))}
             </Tbody>
