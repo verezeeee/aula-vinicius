@@ -47,9 +47,9 @@ export default function Cadastro() {
 
   return (
     <div className="h-[100vh] w-full bg-gradient-radial from-blue-400 to-blue-800 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg h-[60%] w-[70%] text-black">
+      <div className="bg-white p-8 rounded-lg shadow-lg h-[35rem] w-[40rem] text-black">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-3xl font-bold text-center">Cadastro</h1>
+          <h1 className="text-5xl font-bold text-center">Cadastro</h1>
           <div className="mt-4">
             <label
               htmlFor="name"
@@ -116,7 +116,7 @@ export default function Cadastro() {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="mt-12 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Cadastrar
           </button>
