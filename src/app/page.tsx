@@ -48,7 +48,7 @@ export default function Login() {
       })
       .catch((err) => {
         toast({
-          title: err.message,
+          title: "Usuário ou senha inválidos",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -58,7 +58,7 @@ export default function Login() {
 
   return (
     <main>
-      <div className="h-[100vh] w-full bg-gradient-radial from-blue-400 to-blue-800 flex justify-center items-center">
+      <div className="h-[100vh] w-full bg-gradient-radial from-gray-400 to-gray-800 flex justify-center items-center">
         <div className="bg-white p-8 rounded-lg shadow-lg h-[23rem] w-[50%] sm:w-[30%] text-black">
           <form className="flex flex-col h-auto" onSubmit={handleSubmit}>
             <h1 className="sm:text-5xl text-2xl font-bold text-center">

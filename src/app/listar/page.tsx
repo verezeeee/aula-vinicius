@@ -264,12 +264,14 @@ export default function ListPage() {
       {selectedUser && userDeleteModal(selectedUser)}
       <div
         className="
-      h-[100vh] flex-col p-10 gap-2 w-full bg-gradient-radial from-blue-400 to-blue-800 flex justify-between items-center"
+      h-[100vh] flex-col p-10 gap-2 w-full bg-gradient-radial from-gray-400 to-gray-800 flex justify-between items-center"
       >
         <div className="flex items-center justify-between w-full">
-          <h1 className="text-3xl font-bold text-center">Lista de Usuários</h1>
+          <h1 className="text-3xl text-white font-bold text-center">
+            Lista de Usuários
+          </h1>
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-center">
+            <h1 className="text-3xl text-white font-bold text-center">
               {userLogged || "Usuário"}
             </h1>
             <Avatar

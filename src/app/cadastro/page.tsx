@@ -46,7 +46,7 @@ export default function Cadastro() {
   };
 
   return (
-    <div className="h-[100vh] w-full bg-gradient-radial from-blue-400 to-blue-800 flex justify-center items-center">
+    <div className="h-[100vh] w-full bg-gradient-radial from-gray-400 to-gray-800 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg h-[35rem] w-[40rem] text-black">
         <form onSubmit={handleSubmit}>
           <h1 className="text-5xl font-bold text-center">Cadastro</h1>
@@ -119,6 +119,15 @@ export default function Cadastro() {
             className="mt-12 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Cadastrar
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/");
+            }}
+            className="mt-4 w-full bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Voltar
           </button>
         </form>
       </div>
