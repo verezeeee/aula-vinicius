@@ -13,10 +13,15 @@ export default function Login() {
     password: "",
   });
 
+  //Estado para armazenar o email
   const setEmail = (email: string) =>
     setFormState((prevState) => ({ ...prevState, email }));
+
+  //Estado para armazenar a senha
   const setPassword = (password: string) =>
     setFormState((prevState) => ({ ...prevState, password }));
+
+  //Função para enviar os dados do formulário para a API
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     fetch("http://localhost:8000/api/login", {
@@ -28,18 +33,18 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // if (data.usuario.token) {
-        //   localStorage.setItem("token", data.usuario.token);
-        //   localStorage.setItem("name", data.usuario.name);
-        //   toast({
-        //     position: "top-right",
-        //     title: data.message,
-        //     status: "success",
-        //     duration: 5000,
-        //     isClosable: true,
-        //   });
-        //   router.push("/listar");
-        // }
+        if (data.usuario.token) {
+          localStorage.setItem("token", data.usuario.token);
+          localStorage.setItem("name", data.usuario.name);
+          toast({
+            position: "top-right",
+            title: data.message,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          router.push("/listar");
+        }
       })
       .catch((err) => {
         toast({
@@ -56,7 +61,9 @@ export default function Login() {
       <div className="h-[100vh] w-full bg-gradient-radial from-blue-400 to-blue-800 flex justify-center items-center">
         <div className="bg-white p-8 rounded-lg shadow-lg h-[23rem] w-[50%] sm:w-[30%] text-black">
           <form className="flex flex-col h-auto" onSubmit={handleSubmit}>
-            <h1 className="sm:text-5xl text-2xl font-bold text-center">Login</h1>
+            <h1 className="sm:text-5xl text-2xl font-bold text-center">
+              Login
+            </h1>
             <div className="mt-4">
               <label
                 htmlFor="email"
@@ -90,17 +97,17 @@ export default function Login() {
               />
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-[1px] sm:gap-4">
-            <button
-              type="submit"
-              className="mt-4 w-[100%] sm:w-[50%] h-[10%] sm:h-[3rem] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Entrar
-            </button>
-            <Link className="w-[100%] sm:w-[80%]" href="/cadastro">
-              <button className="mt-4 w-[100%] sm:w-full h-[60%] sm:h-[3rem] bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Cadastre-se
+              <button
+                type="submit"
+                className="mt-4 w-[100%] sm:w-[50%] h-[10%] sm:h-[3rem] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Entrar
               </button>
-            </Link>
+              <Link className="w-[100%] sm:w-[80%]" href="/cadastro">
+                <button className="mt-4 w-[100%] sm:w-full h-[60%] sm:h-[3rem] bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                  Cadastre-se
+                </button>
+              </Link>
             </div>
           </form>
         </div>

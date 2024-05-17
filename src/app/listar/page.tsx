@@ -22,16 +22,20 @@ import {
 } from "@chakra-ui/react";
 
 export default function ListPage() {
+  //Estados
   const [name, setName] = useState("");
-  const [id, setId] = useState(0); // [1
+  const [id, setId] = useState(0);
   const [email, setEmail] = useState("");
   const [userLogged, setUserLogged] = useState(null);
-  const [selectedUser, setSelectedUser] = useState<any>(null); // [1
-  const auth = isAuthenticated();
+  const [selectedUser, setSelectedUser] = useState<any>(null);
   const [usersArray, setUsersArray] = useState<any[]>([]);
-  const [useEffectControl, setUseEffectControl] = useState(false); // [2
+  const [useEffectControl, setUseEffectControl] = useState(false);
+
+  const auth = isAuthenticated();
   const toast = useToast();
 
+  //Função para buscar os usuários
+  //UseEffect é usado para buscar os usuários assim que a página é carregada
   useEffect(() => {
     const fetchData = async () => {
       const getUsers = await axios.get(
@@ -61,6 +65,7 @@ export default function ListPage() {
     };
     fetchData();
   }, [useEffectControl]);
+  //Segundo parametro do useEffect usado para que a função seja executada sempre que o estado useEffectControl for alterado
 
   useLayoutEffect(() => {
     if (auth === false) {
@@ -68,6 +73,7 @@ export default function ListPage() {
     }
   }, [auth]);
 
+  //Componente para renderizar a tabela de usuários
   const UsersTable = ({ user }: any) => {
     return (
       <Tr>
@@ -110,6 +116,7 @@ export default function ListPage() {
     );
   };
 
+  //Disclosures para abrir e fechar os modais de edição e exclusão
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
@@ -121,6 +128,7 @@ export default function ListPage() {
     onClose: onDeleteClose,
   } = useDisclosure();
 
+  //Função para deletar um usuário
   const onDeleteConfirm = (id: number) => {
     axios
       .delete(`http://localhost:8000/api/user/deletar/${id}`, {
@@ -151,6 +159,7 @@ export default function ListPage() {
       });
   };
 
+  //Função para editar um usuário
   const onEditConfirm = (id: number) => {
     axios
       .put(
@@ -187,6 +196,8 @@ export default function ListPage() {
         });
       });
   };
+
+  //Modais de edição e exclusão
   const userEditModal = (user: any) => {
     return (
       <Modal isCentered isOpen={isEditOpen} onClose={onEditClose}>
@@ -297,6 +308,7 @@ export default function ListPage() {
             <Tbody>
               {usersArray.map((user) => (
                 <>
+                  {/* Checa se um usuário foi deletado no banco */}
                   {user.deleted_at === null && (
                     <UsersTable key={user.id} user={user} />
                   )}
